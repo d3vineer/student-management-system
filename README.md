@@ -92,4 +92,4 @@ Contributions are welcome! Please feel free to submit a Pull Request or report a
 
 ## License
 
-This project is licensed under the Apache 2.0 License.
+This project is licensed under the Apache-2.0 License.
