@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+</head>
+<body>
+    <h2>Student Details Form</h2>
+    <form action="process_form.php" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label for="student_id">Student ID:</label>
+        <input type="text" name="student_id" required><br><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <label for="address">Address:</label>
+        <textarea name="address" required></textarea><br><br>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" name="mobile" required><br><br>
+
+        <label for="email">Email ID:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label for="department">Department:</label>
+        <input type="text" name="department"><br><br>
+
+        <input type="submit" name="submit" value="Submit">
+    </form>
+
+    <!-- Link to view student details -->
+    <h3><a href="process_form.php">View Student Details</a></h3>
+</body>
+</html>
