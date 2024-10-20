@@ -6,12 +6,53 @@ $password = "";
 $database = "test";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+// Create the database if it doesn't exist
+$db_sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+if ($conn->query($db_sql) === TRUE) {
+    echo "Database created successfully";
+} else {
+    echo "Error creating database: " . $conn->error;
+}
+
+// Connect to the specified database
+$conn->select_db($database);
+
+// Create tables if they don't exist
+$sqlStudent = "CREATE TABLE IF NOT EXISTS Student (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    student_id VARCHAR(50) NOT NULL UNIQUE,
+    dob DATE NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    address TEXT NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    department VARCHAR(100) NOT NULL
+)";
+
+$sqlDepartment = "CREATE TABLE IF NOT EXISTS Department (
+    department_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    department_name VARCHAR(100) NOT NULL UNIQUE
+)";
+
+$sqlMapping = "CREATE TABLE IF NOT EXISTS Mapping (
+    student_id VARCHAR(50) NOT NULL,
+    department_id INT(11) NOT NULL,
+    PRIMARY KEY (student_id, department_id),
+    FOREIGN KEY (student_id) REFERENCES Student(student_id),
+    FOREIGN KEY (department_id) REFERENCES Department(department_id)
+)";
+
+$conn->query($sqlStudent);
+$conn->query($sqlDepartment);
+$conn->query($sqlMapping);
 
 // Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
